@@ -16,6 +16,7 @@
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.23",
     "@types/autoprefixer": "^10.2.0",
+    "@types/chrome": "^0.0.263",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/tailwindcss": "^3.1.0",
