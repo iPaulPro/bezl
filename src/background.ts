@@ -34,16 +34,14 @@ async function checkForFrame(tab: chrome.tabs.Tab) {
         });
         const doc = injected[0]?.result;
         if (!doc || !tab.url) {
-            console.error('checkForFrame: No document found');
             return;
         }
-        // console.log('doc:', doc);
         const { frame } = getFrame({
             htmlString: doc,
             url: tab.url
         });
         if (frame.version) {
-            console.log('checkForFrame: Found a frame!', frame)
+            // console.log('checkForFrame: Found a frame!', frame)
         }
 
     } catch (error) {
@@ -54,3 +52,8 @@ async function checkForFrame(tab: chrome.tabs.Tab) {
 // function updateToolbarIcon(tabId?: number, hasOGTags: boolean) {
 //     // Your code to update the toolbar icon based on hasOGTags
 // }
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log('Message received:', message, sender);
+    sendResponse('Message received');
+});
