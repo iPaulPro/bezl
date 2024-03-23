@@ -6,7 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:ext": "yarn workspace @bezelapp/ext dev",
+    "dev:ext": "yarn workspace ext dev",
+    "dev:web": "yarn workspace web dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true

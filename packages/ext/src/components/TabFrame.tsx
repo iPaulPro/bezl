@@ -26,9 +26,9 @@ const TabFrame: React.FC<FrameComponentProps> = ({ tab }) => {
         // replace with your frame url
         homeframeUrl: tab.url!,
         // corresponds to the name of the route for POST in step 3
-        frameActionProxy: "/frames",
+        frameActionProxy: "http://localhost:3000/frames",
         // corresponds to the name of the route for GET in step 3
-        frameGetProxy: "/frames",
+        frameGetProxy: "http://localhost:3000/frames",
         frameContext: fallbackFrameContext,
         // map to your identity if you have one
         signerState: {
