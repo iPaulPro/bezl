@@ -22,47 +22,6 @@ function FrameImage(
 }
 
 const TabFrame: React.FC<FrameComponentProps> = ({ tab }) => {
-    // const onTransaction: OnTransactionFunc = useCallback(
-    //     async ({ transactionData }) => {
-    //         const { params, chainId, method } = transactionData;
-    //         if (!chainId.startsWith("eip155:")) {
-    //             alert(`debugger: Unrecognized chainId ${chainId}`);
-    //             return null;
-    //         }
-    //
-    //         console.log('onTransaction: transactionData params', params, 'chainId', chainId, 'method', method);
-            //     if (!account.address) {
-            //         openConnectModal?.();
-            //         return null;
-            //     }
-            //
-            //     const requestedChainId = parseInt(chainId.split("eip155:")[1]!);
-            //
-            //     if (currentChainId !== requestedChainId) {
-            //         console.log("switching chain");
-            //         await switchChain(config, {
-            //             chainId: requestedChainId,
-            //         });
-            //     }
-            //
-            //     try {
-            //         // Send the transaction
-            //         console.log("sending tx");
-            //         const transactionId = await sendTransaction(config, {
-            //             to: params.to,
-            //             data: params.data,
-            //             value: BigInt(params.value),
-            //         });
-            //         return transactionId;
-            //     } catch (error) {
-            //         console.error(error);
-            //         return null;
-            //     }
-        // },
-        // [account.address, currentChainId, config, openConnectModal]
-    // );
-
-    console.log('TabFrame: tab.url', tab.url);
     const frameState = useFrame({
         homeframeUrl: tab.url!,
         frameActionProxy: "https://localhost:3000/frames",
@@ -81,7 +40,7 @@ const TabFrame: React.FC<FrameComponentProps> = ({ tab }) => {
         onTransaction: async (args) => {
             const { params, chainId, method } = args.transactionData;
             console.log('onTransaction: transactionData params', params, 'chainId', chainId, 'method', method);
-            return '0x00'
+            return '0x00';
         },
         onMint: (args) => {
             console.log('onMint: args', args);
@@ -90,8 +49,10 @@ const TabFrame: React.FC<FrameComponentProps> = ({ tab }) => {
     });
 
     return (
-        <div className="w-full">
-            <FrameUI frameState={frameState} theme={{}} FrameImage={FrameImage} />
+        <div className="w-full frame-container">
+            <FrameUI frameState={frameState} theme={{
+                bg: 'transparent',
+            }} FrameImage={FrameImage} />
         </div>
     );
 }

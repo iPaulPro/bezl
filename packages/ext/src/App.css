@@ -1,0 +1,25 @@
+.frame-container button {
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 600 !important;
+  font-size: 1.2em !important;
+  color: white !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid #1f2937 !important;
+  background-color: #18181b !important;
+}
+
+.frame-container button:first-child {
+  margin-left: .5rem !important;
+}
+
+.frame-container button:last-child {
+  margin-right: .5rem !important;
+}
+
+.frame-container button:hover {
+  background-color: #374151 !important;
+}
+
+.frame-container img {
+  border: none !important;
+}
