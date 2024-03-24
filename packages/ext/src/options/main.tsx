@@ -1,10 +1,13 @@
 import '../index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Login from './Login.tsx'
+import Options from './Options.tsx'
+import {AuthKitProvider} from '@farcaster/auth-kit'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Login />
-  </React.StrictMode>,
+    <React.StrictMode>
+        <AuthKitProvider>
+            <Options/>
+        </AuthKitProvider>
+    </React.StrictMode>
 )

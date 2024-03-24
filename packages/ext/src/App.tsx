@@ -19,14 +19,16 @@ import {
     TooltipTrigger
 } from '@/components/ui/tooltip'
 
-import {useChromeStorageSync} from 'use-chrome-storage'
+import {useChromeStorageLocal, useChromeStorageSync} from 'use-chrome-storage'
 import {WalletIcon} from 'lucide-react'
+import {Profile} from '@/types/Profile.ts'
 
 const App = () => {
     const [tab, setTab] = useState<chrome.tabs.Tab>()
     const [frame, setFrame] = useState<Frame>()
-    const [isFavorited, setIsFavorited] = useState<boolean>(false)
-    const [value, setValue] = useChromeStorageSync<string[]>('bezel.favorites', [])
+    const [isFavorite, setIsFavorite] = useState<boolean>(false)
+    const [favorites, setFavorites] = useChromeStorageSync<string[]>('bezel.favorites', [])
+    const [profile] = useChromeStorageLocal<Profile>('bezel.profile')
 
     useEffect(() => {
         const checkForFrame = async () => {
@@ -67,20 +69,20 @@ const App = () => {
     function toggleFavorite() {
         if (!tab?.url) return
         const url = tab.url
-        const favorite = value.find(url => url === tab?.url)
+        const favorite = favorites.find(url => url === tab?.url)
         if (favorite) {
-            const newFavorites = value.filter(url => url !== favorite)
-            setValue(newFavorites)
+            const newFavorites = favorites.filter(url => url !== favorite)
+            setFavorites(newFavorites)
             return
         }
-        const newFavorites = [...value, url]
-        setValue(newFavorites)
+        const newFavorites = [...favorites, url]
+        setFavorites(newFavorites)
     }
 
     useEffect(() => {
-        const favorite = value.find(url => url === tab?.url)
-        setIsFavorited(favorite !== undefined)
-    }, [value])
+        const favorite = favorites.find(url => url === tab?.url)
+        setIsFavorite(favorite !== undefined)
+    }, [favorites])
 
     return (
         frame?.version && tab ? (
@@ -89,12 +91,12 @@ const App = () => {
                     <div className="py-2 px-3 h-fit">
                         <DropdownMenu>
                             <DropdownMenuTrigger>
-                                <img src="https://cdn.stamp.fyi/avatar/paulburke.lens" alt="icon"
+                                <img src={profile?.pfpUrl} alt="icon"
                                      className="h-8 w-8 rounded-full object-cover"/>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
                                 <DropdownMenuLabel><WalletIcon size="14" className="inline"/><span
-                                    className="pl-2 pr-1">paulburke.eth</span></DropdownMenuLabel>
+                                    className="pl-2 pr-1">{profile?.username}</span></DropdownMenuLabel>
                                 <DropdownMenuSeparator/>
                                 <DropdownMenuItem
                                     onClick={() => chrome.runtime.openOptionsPage()}>Dashboard</DropdownMenuItem>
@@ -111,7 +113,7 @@ const App = () => {
                                     <button onClick={toggleFavorite}
                                             className="flex justify-center items-center px-3 py-1.5 border border-zinc-700
                                             text-xs text-gray-400 font-semibold rounded-full opacity-60 hover:opacity-100">
-                                        {isFavorited ?
+                                        {isFavorite ?
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                  className="w-4 h-4"
                                                  viewBox="0 0 576 512">
@@ -129,7 +131,7 @@ const App = () => {
                                     </button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                    {isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                                    {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
