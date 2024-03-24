@@ -24,6 +24,17 @@ chrome.windows.onFocusChanged.addListener(function () {
 
 export const getDocument = () => document.head.outerHTML;
 
+const setBadge = async () => {
+    await chrome.action.setBadgeBackgroundColor({ color: '#2dec00' });
+    await chrome.action.setBadgeText({ text: ' ' });
+    await chrome.action.setTitle({ title: 'Frame detected!' });
+}
+
+const clearBadge = async () => {
+    await chrome.action.setBadgeText({ text: '' });
+    await chrome.action.setTitle({ title: 'Focalize' });
+};
+
 async function checkForFrame(tab: chrome.tabs.Tab) {
     if (!tab.id) return;
 
@@ -42,6 +53,9 @@ async function checkForFrame(tab: chrome.tabs.Tab) {
         });
         if (frame.version) {
             console.log('checkForFrame: Found a frame for', tab.url)
+            await setBadge();
+        } else {
+            await clearBadge();
         }
 
     } catch (error) {
