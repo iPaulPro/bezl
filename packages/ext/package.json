@@ -25,6 +25,8 @@
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.23",
     "@farcaster/auth-kit": "^0.2.1",
+    "@farcaster/core": "^0.14.8",
+    "@noble/ed25519": "^2.0.0",
     "@types/chrome": "^0.0.263",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.66",

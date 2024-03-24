@@ -1,7 +1,8 @@
 import React, {ImgHTMLAttributes} from 'react'
 import {useFrame} from 'frames.js/render/use-frame'
-import {fallbackFrameContext, FrameUI} from 'frames.js/render'
-import {mockFarcasterSigner, signFrameAction} from 'frames.js/render/farcaster'
+import {fallbackFrameContext, FarcasterSigner, FrameUI} from 'frames.js/render'
+import {signFrameAction} from 'frames.js/render/farcaster'
+import {useChromeStorageLocal} from 'use-chrome-storage'
 
 type FrameComponentProps = {
     url: string
@@ -22,14 +23,15 @@ function FrameImage(
 }
 
 const TabFrame: React.FC<FrameComponentProps> = ({ url }) => {
+    const [signer] = useChromeStorageLocal<FarcasterSigner>('bezel.signer')
+
     const frameState = useFrame({
         homeframeUrl: url,
         frameActionProxy: "https://localhost:3000/frames",
         frameGetProxy: "https://localhost:3000/frames",
         frameContext: fallbackFrameContext,
         signerState: {
-            // TODO: replace with your signer
-            signer: mockFarcasterSigner,
+            signer: signer,
             hasSigner: true,
             onSignerlessFramePress: () => {
                 // Implement me
@@ -44,8 +46,7 @@ const TabFrame: React.FC<FrameComponentProps> = ({ url }) => {
         },
         onMint: (args) => {
             console.log('onMint: args', args);
-        },
-        dangerousSkipSigning: true
+        }
     });
 
     return (
