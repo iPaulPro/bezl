@@ -23,6 +23,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@airstack/airstack-react": "^0.6.2",
     "@crxjs/vite-plugin": "^2.0.0-beta.23",
     "@farcaster/auth-kit": "^0.2.1",
     "@farcaster/core": "^0.14.8",
