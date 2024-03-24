@@ -31,6 +31,12 @@ const App = () => {
     const [profile] = useChromeStorageLocal<Profile>('bezel.profile')
 
     useEffect(() => {
+        if (!profile) {
+            chrome.runtime.openOptionsPage();
+        }
+    }, [profile]);
+
+    useEffect(() => {
         const checkForFrame = async () => {
             const [tab] = await chrome.tabs.query({active: true, currentWindow: true})
             if (!tab.id) return
@@ -84,7 +90,7 @@ const App = () => {
         setIsFavorite(favorite !== undefined)
     }, [favorites])
 
-    return (
+    return profile && (
         frame?.version && tab ? (
             <div className="w-full h-full flex flex-col pb-2">
                 <div className="w-full flex items-center">
