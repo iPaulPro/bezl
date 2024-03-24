@@ -1,7 +1,18 @@
+'use client'
+
 import {useEffect, useState} from 'react'
 import './App.css'
 import {type Frame, getFrame} from 'frames.js'
 import TabFrame from './components/TabFrame.tsx';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 
 const App = () => {
     const [tab, setTab] = useState<chrome.tabs.Tab>();
@@ -40,23 +51,43 @@ const App = () => {
     return (
         frame?.version && tab ? (
             <div className="w-full h-full flex flex-col pb-1">
-                <div className="w-full flex justify-end gap-3 py-2 px-3">
-                    <button className="flex gap-2 justify-center items-center px-3 py-1.5 border border-gray-400
+                <div className="w-full flex items-center">
+                    <div className="py-2 px-3 h-fit">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <img src="https://cdn.stamp.fyi/avatar/paulburke.lens" alt="icon"
+                                     className="h-8 w-8 rounded-full object-cover"/>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuLabel>paulburke.eth</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>Change profiles</DropdownMenuItem>
+                                <DropdownMenuItem>Favorites</DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>Log out</DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+                    <div className="flex-grow flex justify-end gap-3 py-2 px-3 h-fit">
+                        <button className="flex gap-2 justify-center items-center px-3 py-1.5 border border-gray-400
                      text-xs text-gray-400 font-semibold rounded-full opacity-60 hover:opacity-100">
-                        Add to favorites
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                        </svg>
-                    </button>
-                    <button className="flex gap-2 justify-center items-center px-3 py-1.5 border border-gray-400
+                            Add to favorites
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        </button>
+                        <button className="flex gap-2 justify-center items-center px-3 py-1.5 border border-gray-400
                      text-xs text-gray-400 font-semibold rounded-full opacity-60 hover:opacity-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/>
-                        </svg>
-                    </button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <TabFrame tab={tab}/>
             </div>
