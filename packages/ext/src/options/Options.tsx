@@ -10,9 +10,9 @@ const Options = () => {
             <p>
                 Hello, {profile.displayName}! Your FID is {profile.fid}.
             </p>
-            <p>
+            <div>
                 Your custody address is: <pre>{profile.custody}</pre>
-            </p>
+            </div>
         </div>
     ) : (
         <Login/>

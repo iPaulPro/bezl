@@ -1,5 +1,11 @@
 import { getFrame } from "frames.js"
 
+chrome.runtime.onInstalled.addListener(async (details) => {
+    if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+        await chrome.runtime.openOptionsPage();
+    }
+});
+
 chrome.tabs.onUpdated.addListener(async function (_tabId, changeInfo, tab) {
     if (changeInfo.status === 'complete') {
         await checkForFrame(tab);
