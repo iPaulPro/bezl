@@ -1,38 +1,28 @@
-"use client";
-
 import "@farcaster/auth-kit/styles.css";
 import { AuthKitProvider, SignInButton, useProfile } from "@farcaster/auth-kit";
 
-// const config = {
-//     // For a production app, replace this with an Optimism Mainnet
-//     // RPC URL from a provider like Alchemy or Infura.
-//     relay: "https://relay.farcaster.xyz",
-//     rpcUrl: "https://mainnet.optimism.io",
-//     domain: "localhost:3000",
-//     siweUri: "https://localhost:3000/login",
-// };
-
-function App() {
+const Login = () => {
     return (
-        <main style={{ fontFamily: 'Inter, "Inter Placeholder", sans-serif' }}>
+        <main style={{fontFamily: 'Inter, "Inter Placeholder", sans-serif'}}>
             <AuthKitProvider>
-                <div style={{ position: "fixed", top: "12px", right: "12px" }}>
-                    <SignInButton />
+                <div style={{position: 'fixed', top: '12px', right: '12px'}}>
+                    <SignInButton/>
                 </div>
-                <div style={{ paddingTop: "33vh", textAlign: "center" }}>
-                    <Profile />
+                <div style={{paddingTop: '33vh', textAlign: 'center'}}>
+                    <Profile/>
                 </div>
             </AuthKitProvider>
         </main>
     );
-}
+};
+
 
 function Profile() {
-    const profile = useProfile();
+    const profile = useProfile()
     const {
         isAuthenticated,
-        profile: { fid, displayName, custody },
-    } = profile;
+        profile: {fid, displayName, custody}
+    } = profile
 
     return (
         <>
@@ -55,4 +45,4 @@ function Profile() {
     );
 }
 
-export default App;
+export default Login;

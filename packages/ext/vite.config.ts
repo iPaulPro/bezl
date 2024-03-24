@@ -5,6 +5,13 @@ import manifest from './manifest.json'
 import {nodePolyfills} from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        options: 'src/options/index.html',
+      },
+    },
+  },
   plugins: [
     react(),
     nodePolyfills({

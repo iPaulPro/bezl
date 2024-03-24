@@ -30,7 +30,7 @@ const App = () => {
             });
             if (frameData.frame.version) {
                 setFrame(frameData.frame);
-                console.log('checkForFrame: Found a frame!', frameData.frame);
+                console.log('checkForFrame: Found a frame for ', tab.url, frameData.frame);
             }
         };
 

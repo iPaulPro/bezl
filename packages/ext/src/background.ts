@@ -41,7 +41,7 @@ async function checkForFrame(tab: chrome.tabs.Tab) {
             url: tab.url
         });
         if (frame.version) {
-            // console.log('checkForFrame: Found a frame!', frame)
+            console.log('checkForFrame: Found a frame for', tab.url)
         }
 
     } catch (error) {
