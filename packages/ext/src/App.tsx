@@ -28,13 +28,13 @@ const App = () => {
     const [frame, setFrame] = useState<Frame>()
     const [isFavorite, setIsFavorite] = useState<boolean>(false)
     const [favorites, setFavorites] = useChromeStorageSync<string[]>('bezel.favorites', [])
-    const [profile] = useChromeStorageLocal<Profile>('bezel.profile')
+    const [profile, setProfile, isPersistent, error, isInitialStateResolved ] = useChromeStorageLocal<Profile>('bezel.profile')
 
     useEffect(() => {
-        if (!profile) {
+        if (isInitialStateResolved && !profile) {
             chrome.runtime.openOptionsPage();
         }
-    }, [profile]);
+    }, [isInitialStateResolved, profile]);
 
     useEffect(() => {
         const checkForFrame = async () => {
@@ -91,7 +91,7 @@ const App = () => {
     }, [favorites])
 
     return profile && (
-        frame?.version && tab ? (
+        frame?.version && tab?.url ? (
             <div className="w-full h-full flex flex-col pb-2">
                 <div className="w-full flex items-center">
                     <div className="py-2 px-3 h-fit">
@@ -165,7 +165,7 @@ const App = () => {
                         </TooltipProvider>
                     </div>
                 </div>
-                <TabFrame tab={tab}/>
+                <TabFrame url={tab.url}/>
             </div>
         ) : (
             <div className="bg-red-500 h-16 w-16"></div>

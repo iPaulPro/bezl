@@ -21,9 +21,6 @@
 }
 
 .frame-container img {
-  border-width: 1px;
-  border-top-color: #18181b !important;
-  border-bottom-color: #18181b !important;
-  border-left: none !important;
-  border-right: none !important;
+  border: none !important;
+  border-radius: 0 !important;
 }

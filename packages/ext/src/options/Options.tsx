@@ -1,19 +1,12 @@
 import {useChromeStorageLocal} from 'use-chrome-storage'
 import {Profile} from '@/types/Profile.ts'
 import Login from '@/options/Login.tsx'
+import Dashboard from '@/options/Dashboard.tsx'
 
 const Options = () => {
-    // const [favorites, setValue] = useChromeStorageLocal<string>('bezel.favorites', '')
     const [profile] = useChromeStorageLocal<Profile>('bezel.profile')
     return profile ? (
-        <div>
-            <p>
-                Hello, {profile.displayName}! Your FID is {profile.fid}.
-            </p>
-            <div>
-                Your custody address is: <pre>{profile.custody}</pre>
-            </div>
-        </div>
+        <Dashboard/>
     ) : (
         <Login/>
     )

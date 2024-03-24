@@ -9,7 +9,7 @@ const Login = () => {
     const {
         isAuthenticated
     } = profile
-    const [savedProfile, setProfile] = useChromeStorageLocal<Profile>('bezel.profile')
+    const [, setProfile] = useChromeStorageLocal<Profile>('bezel.profile')
 
     useEffect(() => {
         console.log('isAuthenticated:', isAuthenticated, 'profile:', profile)
@@ -27,16 +27,9 @@ const Login = () => {
     }, [isAuthenticated, profile])
 
     return (
-        <main style={{fontFamily: 'Inter, "Inter Placeholder", sans-serif'}}>
-            <div style={{position: 'fixed', top: '12px', right: '12px'}}>
-                <SignInButton/>
-            </div>
-            <div style={{paddingTop: '33vh', textAlign: 'center'}}>
-                <p>
-                    Click the &quot;Sign in with Farcaster&quot; button above, then scan the QR code
-                    to sign in.
-                </p>
-            </div>
+        <main className="w-full flex flex-col gap-6 place-items-center">
+            <img src={chrome.runtime.getURL("images/icon-512.png")} className="w-20" />
+            <SignInButton/>
         </main>
     )
 }

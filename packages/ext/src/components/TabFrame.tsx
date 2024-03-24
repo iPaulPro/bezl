@@ -4,7 +4,7 @@ import {fallbackFrameContext, FrameUI} from 'frames.js/render'
 import {mockFarcasterSigner, signFrameAction} from 'frames.js/render/farcaster'
 
 type FrameComponentProps = {
-    tab: chrome.tabs.Tab;
+    url: string
 };
 
 function FrameImage(
@@ -21,9 +21,9 @@ function FrameImage(
     );
 }
 
-const TabFrame: React.FC<FrameComponentProps> = ({ tab }) => {
+const TabFrame: React.FC<FrameComponentProps> = ({ url }) => {
     const frameState = useFrame({
-        homeframeUrl: tab.url!,
+        homeframeUrl: url,
         frameActionProxy: "https://localhost:3000/frames",
         frameGetProxy: "https://localhost:3000/frames",
         frameContext: fallbackFrameContext,
