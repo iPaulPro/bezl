@@ -36,11 +36,11 @@ query GetTrendingMints() {
 `
 
 const Dashboard = () => {
-    const [favorites, setFavorites] = useChromeStorageSync<string[]>('bezel.favorites', [])
+    const [favorites, setFavorites] = useChromeStorageSync<string[]>('bezl.favorites', [])
     const [trending, setTrending] = useState<string[]>([])
     const [forYou, setForYou] = useState<string[]>([])
     const [mints, setMints] = useState<string[]>([])
-    const [profile] = useChromeStorageLocal<Profile>('bezel.profile')
+    const [profile] = useChromeStorageLocal<Profile>('bezl.profile')
 
     const {data, loading, error} = useQuery(getTrendingMints)
 

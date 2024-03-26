@@ -27,8 +27,8 @@ const App = () => {
     const [tab, setTab] = useState<chrome.tabs.Tab>()
     const [frame, setFrame] = useState<Frame>()
     const [isFavorite, setIsFavorite] = useState<boolean>(false)
-    const [favorites, setFavorites] = useChromeStorageSync<string[]>('bezel.favorites', [])
-    const [profile, setProfile, isPersistent, error, isInitialStateResolved ] = useChromeStorageLocal<Profile>('bezel.profile')
+    const [favorites, setFavorites] = useChromeStorageSync<string[]>('bezl.favorites', [])
+    const [profile, setProfile, isPersistent, error, isInitialStateResolved ] = useChromeStorageLocal<Profile>('bezl.profile')
 
     useEffect(() => {
         if (isInitialStateResolved && !profile) {

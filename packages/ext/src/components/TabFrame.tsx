@@ -23,7 +23,7 @@ function FrameImage(
 }
 
 const TabFrame: React.FC<FrameComponentProps> = ({ url }) => {
-    const [signer] = useChromeStorageLocal<FarcasterSigner>('bezel.signer')
+    const [signer] = useChromeStorageLocal<FarcasterSigner>('bezl.signer')
 
     const frameState = useFrame({
         homeframeUrl: url,

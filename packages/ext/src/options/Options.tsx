@@ -4,7 +4,7 @@ import Login from '@/options/Login.tsx'
 import Dashboard from '@/options/Dashboard.tsx'
 
 const Options = () => {
-    const [profile] = useChromeStorageLocal<Profile>('bezel.profile')
+    const [profile] = useChromeStorageLocal<Profile>('bezl.profile')
     return profile ? (
         <Dashboard/>
     ) : (

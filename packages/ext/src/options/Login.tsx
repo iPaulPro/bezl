@@ -11,8 +11,8 @@ const Login = () => {
     const {
         isAuthenticated
     } = profile
-    const [, setProfile] = useChromeStorageLocal<Profile>('bezel.profile')
-    const [, setSigner] = useChromeStorageLocal<FarcasterSigner>('bezel.signer')
+    const [, setProfile] = useChromeStorageLocal<Profile>('bezl.profile')
+    const [, setSigner] = useChromeStorageLocal<FarcasterSigner>('bezl.signer')
 
     useMemo(() => {
         console.log('isAuthenticated:', isAuthenticated, 'profile:', profile)
